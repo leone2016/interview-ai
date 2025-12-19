@@ -12,8 +12,8 @@ import FormField from "./FormField";
 
 const authFormSchema = (type: FormType) => {
   return z.object({
-    name: type === "sign-in" ? z.string().min(3) : z.string().optional(),
-    email: z.email(),
+    name: type === "sign-in" ? z.string().optional() : z.string().min(3),
+    email: z.string().email(),
     password: z.string().min(3),
   });
 };
@@ -69,8 +69,19 @@ const AuthForm = ({ type }: { type: FormType }) => {
                 placeholder="your name"
               />
             )}
-            <p>Email</p>
-            <p>Password</p>
+             <FormField
+                control={form.control}
+                name="email"
+                label="Email"
+                placeholder="your email"
+              />
+            <FormField
+                control={form.control}
+                name="password"
+                label="Password"
+                placeholder="your password"
+              />
+              
             <Button className="btn" type="submit">
               {isSignIn ? "Sign In" : "Create an Account"}
             </Button>
